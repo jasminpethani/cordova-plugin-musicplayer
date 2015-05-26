@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.srini.musicplayer"
+    version="1">
+    <name>MusicPlayer</name>
+    <description>Srini MusicPlayer Plugin</description>
+    <keywords>cordova,MusicPlayer,plugin</keywords>
+    <repo></repo>
+    <issue></issue>
+
+    <js-module src="www/musicplayer.js" name="musicplayer">
+        <clobbers target="musicplayer" />
+    </js-module>
+
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="MusicPlayer" >
+                <param name="android-package" value="com.srini.musicplayer.MusicPlayer"/>
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="application">
+            <service android:name="com.srini.musicplayer.MusicPlayerService" />
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+        </config-file>
+        
+        <source-file src="src/android/MusicPlayer.java" target-dir="src/com/srini/musicplayer" />
+        <source-file src="src/android/MusicPlayerService.java" target-dir="src/com/srini/musicplayer" />
+    </platform>
+
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="MusicPlayer">
+                <param name="ios-package" value="MusicPlayer"/>
+            </feature>
+        </config-file>
+        <framework src="MediaPlayer.framework"/>
+        <header-file src="src/ios/MusicPlayer.h" />
+
+        <source-file src="src/ios/MusicPlayer.m" />
+    </platform>
+
+
+
+</plugin>
